@@ -1,4 +1,4 @@
-/* style.css — Официальный стиль СЗДР */
+/* style.css — СЗДР: официальный портал с эффектом «матового стекла» */
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap');
 
 * {
@@ -8,91 +8,88 @@
 }
 
 :root {
-  --gov-blue: #0c2a5e;      /* основной синий (как у герба/флага) */
+  --gov-blue: #0c2a5e;
   --gov-blue-light: #1a4480;
-  --gov-gold: #c9a44a;      /* золото/бронза (декор, рамки) */
+  --gov-gold: #c9a44a;
   --gov-gold-light: #e6c06e;
-  --gov-gray: #3a3a4a;
-  --gov-text: #222233;
-  --gov-text-light: #4a4a5a;
-  --gov-border: #5a6a8a;
-  --shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  --gov-text: #1e2a4a;
+  --gov-text-light: #3a4560;
+  --border-glass: rgba(12, 42, 94, 0.18);
 }
 
-/* Фон — фиксированная картинка с лёгким затемнением */
+/* Фон — фиксированная картинка */
 body {
   font-family: 'PT Sans', Arial, sans-serif;
   color: var(--gov-text);
   line-height: 1.6;
-  padding: 0;
-  margin: 0;
-  background-color: #0e1a30;
+  background-color: #0a152e;
   background-image: url('hzdr.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   background-repeat: no-repeat;
   min-height: 100vh;
-  position: relative;
+  padding: 40px 20px;
 }
 
-/* Лёгкое затемнение фона (едва заметное) */
-body::before {
-  content: '';
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0, 5, 30, 0.12); /* едва уловимое затемнение */
-  pointer-events: none;
-  z-index: -1;
-}
-
-/* Основной контент — на светлом фоне с тенью */
+/* Обёртка контента — центрирует, ограничивает ширину */
 .main-content {
-  max-width: 1000px;
+  max-width: 860px;
   margin: 0 auto;
-  padding: 20px;
 }
 
-/* Заголовок сайта — официальный, с геральдическим оттенком */
+/* Заголовок */
 h1 {
   text-align: center;
-  font-family: 'PT Serif', 'Times New Roman', serif;
-  font-size: 2.4rem;
+  font-family: 'PT Serif', serif;
+  font-size: 2.3rem;
   font-weight: 700;
-  color: var(--gov-blue);
-  margin: 30px 0 20px;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
-  position: relative;
+  color: white;
+  margin: 30px 0 24px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  letter-spacing: -0.5px;
 }
 
 h1::after {
   content: '';
   display: block;
-  width: 80px;
-  height: 3px;
-  background: linear-gradient(to right, var(--gov-blue), var(--gov-gold));
+  width: 70px;
+  height: 2px;
+  background: linear-gradient(to right, var(--gov-gold), #ffffff55);
   margin: 12px auto;
-  border-radius: 1px;
 }
 
-/* Общие контейнеры — карточки в стиле госпортала */
+/* Контейнеры — «матовое стекло» (frosted glass) */
 .container-info,
 .container-location,
 .container-news,
 .container-history,
 .container-latest {
-  background: white;
-  border-radius: 6px;
-  padding: 24px;
-  margin: 28px auto;
-  box-shadow: var(--shadow);
-  border: 1px solid #d0d5dd;
+  /* Основа стекла */
+  background: rgba(255, 255, 255, 0.68);
+  backdrop-filter: blur(8px) saturate(120%);
+  -webkit-backdrop-filter: blur(8px) saturate(120%); /* Safari support */
+
+  /* Граница — тонкая, полупрозрачная */
+  border: 1px solid var(--border-glass);
+  border-radius: 10px;
+
+  /* Внутренняя подложка для читаемости текста */
   position: relative;
   overflow: hidden;
+  padding: 26px;
+  margin: 28px auto;
+
+  /* Тень — лёгкая, как у всплывающего окна */
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.12),
+    0 1px 3px rgba(0, 0, 0, 0.06);
+
+  /* Геральдическая полоса слева */
+  border-left: 5px solid var(--gov-blue);
 }
 
-/* Лёгкая геральдическая полоса слева */
+/* Подложка под текст (для лучшей читаемости на сложном фоне) */
 .container-info::before,
 .container-location::before,
 .container-news::before,
@@ -100,26 +97,25 @@ h1::after {
 .container-latest::before {
   content: '';
   position: absolute;
-  top: 0; left: 0;
-  width: 6px;
-  height: 100%;
-  background: linear-gradient(to bottom, var(--gov-blue), var(--gov-gold));
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(250, 252, 255, 0.45); /* очень светлая подложка */
+  z-index: -1;
 }
 
-/* Заголовки внутри контейнеров */
+/* Заголовки внутри */
 h3, h2 {
-  font-family: 'PT Serif', 'Times New Roman', serif;
+  font-family: 'PT Serif', serif;
   font-weight: 700;
   color: var(--gov-blue);
   margin-bottom: 16px;
-  font-size: 1.6rem;
+  font-size: 1.55rem;
 }
 
 h2 {
-  font-size: 1.8rem;
+  font-size: 1.7rem;
   text-align: center;
   padding-bottom: 8px;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px dashed var(--border-glass);
 }
 
 /* Текст */
@@ -130,7 +126,7 @@ p {
   text-align: justify;
 }
 
-/* Ссылки — синие, без подчёркивания (как в госсайтах), по ховеру — подчёркивание */
+/* Ссылки */
 a {
   color: var(--gov-blue);
   text-decoration: none;
@@ -144,71 +140,61 @@ a:hover {
   border-bottom: 1px solid var(--gov-gold);
 }
 
-/* iframe — аккуратный, с рамкой и тенью */
+/* iframe */
 .container-location iframe {
   width: 100%;
-  max-width: 800px;
-  height: 400px;
-  border: 1px solid #c0c6d0;
-  border-radius: 4px;
+  max-width: 780px;
+  height: 420px;
+  border: 1px solid rgba(12, 42, 94, 0.1);
+  border-radius: 6px;
   display: block;
-  margin: 16px auto 0;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  margin: 20px auto 0;
+  background: white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
-/* Кнопка — официальная, с логотипом "вперёд" (стрелка вправо) */
-.neon-button,
+/* Кнопка — стиль «официального действия» */
 button#tg-news-btn {
   display: inline-block;
-  padding: 12px 28px;
-  font-family: 'PT Sans', Arial, sans-serif;
+  padding: 12px 32px;
   font-size: 1.05rem;
   font-weight: 600;
   color: white;
   background: var(--gov-blue);
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
+  box-shadow: 0 2px 6px rgba(12, 42, 94, 0.25);
+  transition: all 0.25s ease;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 2px 5px rgba(12, 42, 94, 0.3);
-  transition: all 0.25s ease;
-  text-transform: none;
 }
 
 button#tg-news-btn::after {
   content: ' →';
-  font-weight: bold;
 }
 
 button#tg-news-btn:hover {
   background: var(--gov-blue-light);
   transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(12, 42, 94, 0.4);
+  box-shadow: 0 4px 10px rgba(12, 42, 94, 0.35);
 }
 
 button#tg-news-btn:active {
   transform: translateY(0);
 }
 
-/* Footer — с лентой и копирайтом */
-footer {
-  text-align: center;
-  padding: 16px;
-  margin-top: 30px;
-  color: #555;
-  font-size: 0.95rem;
-  border-top: 1px solid #e0e0e0;
-  background: #fafbfd;
-  font-family: 'PT Sans', Arial, sans-serif;
+/* Последний пост — чуть иначе, подчёркивает важность */
+.container-latest {
+  border-left-color: var(--gov-gold);
 }
 
-/* Последний пост — выделен */
 #latest-post-content {
-  background: #f8f9fc;
+  background: rgba(245, 249, 255, 0.7);
   padding: 20px;
-  border-radius: 4px;
-  border-left: 4px solid var(--gov-gold);
+  border-radius: 6px;
+  border-left: 3px solid var(--gov-gold);
+  margin-top: 16px;
 }
 
 #latest-post-content h3 {
@@ -217,38 +203,41 @@ footer {
   margin-bottom: 10px;
 }
 
-#latest-post-content p {
-  margin-bottom: 10px;
-}
-
-#latest-post-content .neon-button {
-  font-size: 0.95rem;
-  padding: 8px 20px;
-  margin-top: 8px;
-}
-
 #last-updated {
   font-size: 0.85rem;
-  color: #777;
+  color: #667;
   display: block;
   margin-top: 8px;
 }
 
+/* Footer */
+footer {
+  text-align: center;
+  padding: 18px;
+  margin-top: 30px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.95rem;
+  font-family: 'PT Sans', sans-serif;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  background: rgba(12, 42, 94, 0.25);
+  border-radius: 8px;
+  border: 1px solid rgba(201, 164, 74, 0.15);
+}
+
 /* Адаптивность */
 @media (max-width: 768px) {
-  .main-content { padding: 12px; }
-  h1 { font-size: 1.8rem; }
+  body { padding: 20px 12px; }
+  .main-content { max-width: 100%; }
+  h1 { font-size: 1.9rem; }
   h3, h2 { font-size: 1.4rem; }
   .container-info,
   .container-location,
   .container-news,
   .container-history,
   .container-latest {
-    padding: 18px;
+    padding: 20px;
+    margin: 20px auto;
   }
-  .container-location iframe {
-    height: 280px;
-  }
+  .container-location iframe { height: 280px; }
 }
-
-/* Доп: если хочешь логотип/герб — можно добавить позже как background-image у h1 или отдельный div */
