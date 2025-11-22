@@ -7,8 +7,9 @@
     <title>HZDR</title>
   </head>
   <body>
-    <h1>Официальный сайт СЗДР</h1>
-    <p></p>
+    <div class="main-content">
+      <h1>Официальный сайт СЗДР</h1>
+      <p></p>
     <div class="container-info">
       <h3>Основная информация</h3>
       <p>
@@ -37,9 +38,7 @@
         Все новости и трэш страны публикуется в телеграмм канале, а на сайте
         будет видно последний пост в конце
       </p>
-      <a href="https://t.me/+EdZIgBkRhK9kNGRi" class="neon-button"
-        >Телеграмм-канал</a
-      >
+      <button id="tg-news-btn">Перейти в новостной канал</button>
     </div>
     <div class="container-history">
       <h3>История</h3>
@@ -69,6 +68,7 @@
     >
       HZDR 2025© Copyright - Страна Имба
     </footer>
+    </div>
     <script>
       const updateLatestPost = async () => {
         const container = document.getElementById("latest-post-content");
@@ -183,6 +183,7 @@
     </script>
   </body>
 </html>
+
 
 
 
